@@ -8,6 +8,8 @@ RUN apt-get update && apt install python3 python3-pip python-is-python3 libopenm
 
 ADD qwen-vl /app
 
+RUN pwd && ls -la
+
 # Install dependencies
 # Funky set of specific versions required to allow both inference and training of Int4 LoRRAs
 RUN python3 -m pip install -r requirements.txt hf_transfer mpi4py deepspeed wandb peft==0.6.0 optimum==1.13.2 auto-gptq==0.4.2
