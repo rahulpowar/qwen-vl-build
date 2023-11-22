@@ -7,8 +7,9 @@ RUN apt-get update && apt install python3 python3-pip python-is-python3 libopenm
     && rm -rf /var/lib/apt/lists/*
 
 ADD qwen-vl /app
+ADD qwen-demo.py /app
 
-RUN pwd && ls -la
+RUN ls -la
 
 # Install dependencies
 # Funky set of specific versions required to allow both inference and training of Int4 LoRRAs
