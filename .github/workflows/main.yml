@@ -7,6 +7,9 @@ on:
   release:
     types: [created]
 
+env:
+  CONTAINER_IMAGE: rahulpowar/qwen-vl
+
 jobs:
   docker:
     runs-on: ubuntu-latest
@@ -21,7 +24,7 @@ jobs:
         with:
           # list of Docker images to use as base name for tags
           images: |
-            rahulpowar/qwen-vl
+            $CONTAINER_IMAGE
           # generate Docker tags based on the following events/attributes
           tags: |
             type=sha
@@ -40,10 +43,19 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_API }}
       -
         name: Build and push
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v5
         with:
+          context: .
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
-          cache-to: type=gha,mode=max          
+          cache-to: type=gha,mode=max     
+          
+      - 
+        name: Update repo description
+        uses: peter-evans/dockerhub-description@v3
+        with:
+          username: ${{ secrets.DOCKER_HUB_USER }}
+          password: ${{ secrets.DOCKER_HUB_API }}
+          repository: $CONTAINER_IMAGE         
