@@ -11,7 +11,7 @@ Note, this multi modal model requires GPUs to run with 10gb to 13Gb of VRAM for 
 ```
 $ docker run --rm --gpus all rahulpowar/qwen-vl ./qwen-demo.py \
     "https://www.looper.com/img/gallery/heres-who-played-darth-vader-without-his-helmet/intro-1566225818.jpg" \
-    "https://cdn.britannica.com/54/75854-050-E27E66C0/Eiffel-Tower-Paris.jpg"
+    "https://assets.editorial.aetnd.com/uploads/2014/03/gettyimages-1222666416.jpg"
 ```
 
 ```
