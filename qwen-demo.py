@@ -5,7 +5,9 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 from transformers.generation import GenerationConfig
 import torch
 import argparse
+from peft import AutoPeftModelForCausalLM
 
+        
 # Set seed for reproducibility
 torch.manual_seed(1234)
 
@@ -28,6 +30,9 @@ if __name__ == '__main__':
     # use cuda device
     # NOTE: cuda device is required for Multi Modal queries
     model = AutoModelForCausalLM.from_pretrained(args.model, device_map='cuda', trust_remote_code=True).eval()
+    
+    # model = AutoPeftModelForCausalLM.from_pretrained(args.model, device_map="cuda", trust_remote_code=True).eval()
+
 
     # Specify hyperparameters for generation
     model.generation_config = GenerationConfig.from_pretrained(args.model, trust_remote_code=True)
